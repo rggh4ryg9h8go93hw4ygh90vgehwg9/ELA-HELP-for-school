@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Academic Resource Hub - Study Portal</title>
+    <style>
+        /* Stealth Styling: Looks like a school site, but acts like a game hub */
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f2f5; color: #1c1e21; text-align: center; margin: 0; padding: 20px; }
+        
+        /* Hidden Panic Button: Very light so it's hard for teachers to see */
+        #panic-btn { position: fixed; top: 10px; right: 10px; background: rgba(0,0,0,0.05); color: #777; border: 1px solid #ccc; padding: 5px 10px; font-size: 11px; cursor: pointer; z-index: 1000; border-radius: 4px; }
+        #panic-btn:hover { background: #ff4b2b; color: white; opacity: 1; }
+
+        h1 { color: #2c3e50; font-size: 2.5em; margin-bottom: 5px; }
+        .subtitle { color: #555; margin-bottom: 30px; font-style: italic; }
+
+        /* Proxy Section - Renamed to "Gateway" to avoid filters */
+        .gateway-box { background: white; border: 1px solid #ddd; padding: 25px; border-radius: 12px; margin: 20px auto; width: 90%; max-width: 600px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        .gateway-box h3 { margin-top: 0; color: #3498db; }
+        input, select { padding: 12px; margin: 10px 5px; border-radius: 6px; border: 1px solid #ccc; background: #fff; color: #333; font-size: 16px; width: 80%; }
+        
+        /* The "Launch" Link - Looks like an educational button */
+        .launch-link { display: inline-block; margin-top: 15px; padding: 12px 30px; background: #3498db; color: white; text-decoration: none; font-weight: bold; border-radius: 6px; transition: 0.3s; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+        .launch-link:hover { background: #2980b9; transform: translateY(-2px); }
+
+        /* Game Grid - Renamed to "Interactive Modules" */
+        .grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 25px; margin-top: 40px; }
+        .card { background: white; border: 1px solid #ddd; border-radius: 12px; padding: 15px; width: 400px; transition: 0.3s; }
+        .card:hover { box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
+        .card h3 { color: #e74c3c; margin-top: 0; font-size: 1.1em; }
+        iframe { width: 100%; height: 350px; border: none; border-radius: 8px; background: #eee; }
+    </style>
+</head>
+<body>
+
+    <!-- INSTANT EXIT -->
+    <button id="panic-btn" onclick="panic()">CLOSE RESOURCES (ESC)</button>
+
+    <h1>Academic Resource Hub</h1>
+    <p class="subtitle">Secure Gateway for Research and Interactive Modules</p>
+    
+    <!-- STEALTH PROXY GATEWAY -->
+    <div class="gateway-box">
+        <h3>Research Access Gateway</h3>
+        <p>Select a server and enter your destination URL below:</p>
+        
+        <select id="serverSelect" onchange="updateLink()">
+            <option value="https://www.blockaway.net">Network Server 1</option>
+            <option value="https://www.proxysite.com">Network Server 2</option>
+            <option value="https://www.filterbypass.me">Network Server 3</option>
+        </select>
+        
+        <br>
+        <input type="text" id="proxyInput" placeholder="example: youtube.com" onkeyup="updateLink()">
+        <br>
+        
+        <!-- Standard Link to bypass "about:blank#blocked" -->
+        <a id="finalLink" href="https://google.com" target="_blank" rel="noopener noreferrer" class="launch-link">ACCESS MATERIAL</a>
+    </div>
+
+    <!-- HIDDEN GAME GRID -->
+    <div class="grid">
+        <div class="card">
+            <h3>Module A: Logic & Probability</h3>
+            <iframe src="https://gabrielecirulli.github.io"></iframe>
+        </div>
+
+        <div class="card">
+            <h3>Module B: Geometric Patterns</h3>
+            <iframe src="https://www.google.com"></iframe>
+        </div>
+        
+        <div class="card">
+            <h3>Module C: Physics Simulation</h3>
+            <iframe src="https://www.hoodamath.com"></iframe>
+        </div>
+    </div>
+
+    <script>
+        // Builds the stealth link as you type
+        function updateLink() {
+            let input = document.getElementById('proxyInput').value;
+            let server = document.getElementById('serverSelect').value;
+            let link = document.getElementById('finalLink');
+            
+            if (input) {
+                let cleanUrl = input;
+                if (!cleanUrl.startsWith('http')) {
+                    cleanUrl = 'https://' + cleanUrl;
+                }
+                link.href = server + encodeURIComponent(cleanUrl);
+            } else {
+                link.href = "https://google.com";
+            }
+        }
+
+        // Panic Redirect: Instantly goes to Google Classroom
+        function panic() {
+            window.location.href = "https://classroom.google.com";
+        }
+
+        // Key Listener: Pressing 'Escape' triggers panic mode
+        document.addEventListener('keydown', (e) => {
+            if (e.key === "Escape") panic();
+        });
+    </script>
+
+</body>
+</html>
